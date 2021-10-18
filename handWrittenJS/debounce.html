@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>剁手按钮</button>
+</body>
+<script>
+    const button = document.querySelector("button");
+    function payMoney(){
+        console.log("已剁手");
+        console.log(this);
+    }
+    //防抖
+    function debounce(func,delay){
+        let timer;
+        return function(){
+            let content = this;
+            let _args = arguments;
+            clearTimeout(timer);
+            timer = setTimeout(function() { //如果这里使用箭头函数，this就不需要使用变量传递了。
+                func.call(content,_args);
+            }, delay);
+            
+        }
+    }
+    button.addEventListener("click",debounce(payMoney,1000));
+</script>
+</html>
